@@ -5,7 +5,7 @@
 public class LeapYear {
 
     /**
-     * Update this comment to describe what this method does.
+     * Return a boolean value of whether given year is a leap year or not
      */
     public static boolean isLeapYear(int year) {
         return (year % 400 == 0 || year % 4 == 0 && year % 100 != 0);
