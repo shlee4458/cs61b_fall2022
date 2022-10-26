@@ -137,8 +137,15 @@ public class Model extends Observable {
      *  Empty spaces are stored as null.
      */
     public static boolean emptySpaceExists(Board b) {
-        // TODO: Fill in this function.
-        return false;
+        boolean isNull = false;
+        for (int col = 0; col < b.size(); col++){
+            for (int row = 0; row < b.size(); row++){
+                if (b.tile(col, row) == null){
+                    isNull = true;
+                }
+            }
+        }
+        return isNull;
     }
 
     /**
@@ -147,7 +154,15 @@ public class Model extends Observable {
      * given a Tile object t, we get its value with t.value().
      */
     public static boolean maxTileExists(Board b) {
-        // TODO: Fill in this function.
+        for (int col = 0; col < b.size(); col++) {
+            for (int row = 0; row < b.size(); row++) {
+                if (b.tile(col,row) == null){
+                    continue;
+                } else if (b.tile(col, row).value() == Model.MAX_PIECE) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -158,7 +173,32 @@ public class Model extends Observable {
      * 2. There are two adjacent tiles with the same value.
      */
     public static boolean atLeastOneMoveExists(Board b) {
-        // TODO: Fill in this function.
+        if (emptySpaceExists(b) || verticalTest(b) || horizontalTest(b)){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean verticalTest(Board b){
+        for (int col = 0; col < b.size(); col++){
+            for (int row = 0; row < b.size() - 1; row++){
+                if (b.tile(col, row).value() == b.tile(col, row + 1).value()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public static boolean horizontalTest(Board b){
+        for (int row = 0; row < b.size(); row++){
+            for (int col = 0; col < b.size() - 1; col++){
+                if (b.tile(col, row).value() == b.tile(col + 1, row).value()){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
